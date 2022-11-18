@@ -1,0 +1,15 @@
+"declaration": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+"outDir": "build" ----> "outDir": "dist",
+
+ "lib": [],  ---> "lib": ["es6", "dom"],
+
+
+"noImplicitAny"  ----->  : true,
+
+----> Bổ sung:  "suppressImplicitAnyIndexErrors": true,
+
+     "removeComments" ----> : true,    
+Bổ sung ,
+  "exclude": ["node_modules", "dist"] ở dưới cùng
