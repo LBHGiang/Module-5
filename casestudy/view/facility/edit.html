@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Furama Resort</title>
+
+    <!--      boostrap 5.1.3-->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!--     end  boostrap 5.1.3-->
+
+    <!--        jquery1.9.1-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous">
+    </script>
+    <!--  end jquery1.9.1-->
+    <link rel="stylesheet" href="/css/contract/create/create.css">
+
+    <style>
+        body {
+            background: url("/image/bg_img.jpg") repeat center/cover;
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="header-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-3 align-items-center bestel-logo">
+                    <a href="/home" class="header-logo">
+                        <img
+                                src="image/logo_img.png" alt="logo "
+                                class="img-fluid" style="margin: 20px">
+                    </a>
+                </div>
+                <div class="col-7 align-items-center bestel-logo">
+                </div>
+                <div class="col-2 align-items-center bestel-logo">
+                    <div style="margin-top: 40px; color: #9933cc">Lê Bá Hoàng Giang</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="header-nav js-header-nav sticky bg-light">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg">
+                <div class="navbar-collapse" style="display: flex; justify-content: space-between">
+                    <ul id="menu-furama-vi" class="menu navbar-nav js-main-menu">
+                        <li id="nav-menu-item-5006"
+                            class="nav-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page">
+                            <a href="/home" class="nav-link main-menu-link">HOME</a>
+                        </li>
+                        <li id="nav-menu-item-5007"
+                            class="nav-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page">
+                            <a href="/employees" class="nav-link main-menu-link">EMPLOYEE</a>
+                        </li>
+                        <li id="nav-menu-item-5008"
+                            class="nav-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page">
+                            <a href="/customers" class="nav-link main-menu-link">CUSTOMER</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/facilities" id="navbarDropdown"
+                               role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                SERVICE
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="/facilities">All Facilities</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/facilities?searchFacilityType=Villa">VILLA</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/facilities?searchFacilityType=House">HOUSE</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/facilities?searchFacilityType=Room">ROOM</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="nav-menu-item-5010"
+                            class="nav-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page">
+                            <a href="/contracts"
+                               class="nav-link main-menu-link">CONTRACT
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div>
+                        <a href="/facilities" class="btn btn-primary" type="button">Quay lại
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row" style="width: 100%; padding: 0; margin: 0;">
+            <div id="content">
+                <div class="notify">
+                    <div th:if="${message}">
+                        <h2 style="color: #4caf50" th:text="${message}"></h2>
+                    </div>
+                </div>
+
+                <h1 style="text-align: center; color: blue">Chỉnh sửa Dịch Vụ</h1>
+
+                <form id="form" action="/facilities/edit" th:object="${facilityDto}"
+                      method="post" novalidate="novalidate">
+                    <fieldset style="width: 50%; margin-left: 25%">
+                        <legend>Chỉnh sửa thông tin</legend>
+                        <table class="table table-striped" style="text-align: left">
+                            <input type="hidden" th:field="*{id}"/>
+                            <tr>
+                                <td>Tên</td>
+                                <td><input type="text" th:field="*{name}"></td>
+                            </tr>
+                            <tr>
+                                <td>Kiểu dịch vụ</td>
+                                <td><select th:field="*{facilityType}" id="facilityTypeSelect">
+                                    <option th:each="facilityType: ${facilityTypes}"
+                                            th:value="${facilityType.id}" th:text="${facilityType.name}"></option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>Diện tích</td>
+                                <td><input type="text" th:field="*{area}"></td>
+                            </tr>
+                            <tr>
+                                <td>Giá</td>
+                                <td><input type="text" th:field="*{cost}"></td>
+                            </tr>
+                            <tr>
+                                <td>Số người tối đa</td>
+                                <td><input type="text" th:field="*{maxPeople}"></td>
+                            </tr>
+                            <tr>
+                                <td>Kiểu thuê</td>
+                                <td><select th:field="*{rentType}">
+                                    <option th:each="rentType: ${rentTypes}"
+                                            th:value="${rentType.id}" th:text="${rentType.name}"></option>
+                                </select></td>
+                            </tr>
+                            <tr class="villa house">
+                                <td>Tiêu chuẩn phòng</td>
+                                <td><input type="text" th:field="*{standardRoom}"></td>
+                            </tr>
+                            <tr class="villa house">
+                                <td>Mô tả</td>
+                                <td><input type="text" th:field="*{descriptionOtherConvenience}"></td>
+                            </tr>
+                            <tr class="villa">
+                                <td>Diện tích hồ bơi</td>
+                                <td><input type="text" th:field="*{poolArea}"></td>
+                            </tr>
+                            <tr class="villa house">
+                                <td>Số tầng</td>
+                                <td><input type="text" th:field="*{numberOfFloors}"></td>
+                            </tr>
+                            <tr class="room">
+                                <td>Dịch vụ miễn phí</td>
+                                <td><input type="text" th:field="*{facilityFree}"></td>
+                            </tr>
+                            <tr>
+                                <td><a th:href="@{/facilities/{id}/edit(id=${facilityDto.id})}" class="btn btn-primary"
+                                       role="button">Hoàn tác</a></td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer>
+    &copy; C0622G1 Lê Bá Hoàng Giang - Thank you for using our service!
+</footer>
+</body>
+</html>
