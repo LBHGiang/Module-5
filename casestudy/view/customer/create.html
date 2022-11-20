@@ -20,15 +20,10 @@
             crossorigin="anonymous">
     </script>
     <!--  end jquery1.9.1-->
-    <link rel="stylesheet" href="/css/contract/create/create.css">
 
-    <style>
-        body {
-            background: url("/image/bg_img.jpg") repeat center/cover;
-            height: 100vh;
-            width: 100vw;
-        }
-    </style>
+    <link rel="stylesheet" href="../../layout/list.css">
+
+
 </head>
 
 
@@ -87,111 +82,86 @@
                         </a>
                     </li>
                 </ul>
-
             </div>
         </nav>
     </div>
 </div>
 
+
 <div class="container-fluid">
     <div class="row" style="width: 100%; padding: 0; margin: 0;">
         <div id="content">
-            <div class="notify">
+            <div class="notify" style="text-align: center">
                 <div th:if="${message}">
                     <h2 style="color: #4caf50" th:text="${message}"></h2>
                 </div>
             </div>
 
-            <h1 style="text-align: center; color: blue">Thêm mới Dịch Vụ</h1>
+            <h1 style="text-align: center; color: blue">Thêm mới Khách Hàng</h1>
 
-            <form id="form" action="/facilities/create" th:object="${facilityDto}"
+            <form action="/customers/create" th:object="${customerDto}"
                   method="post">
                 <fieldset style="width: 65%; margin-left: 25%">
                     <legend>Nhập thông tin</legend>
                     <table class="table table-striped" style="text-align: left">
                         <input type="hidden" th:field="*{id}"/>
                         <tr>
-                            <td>Tên</td>
+                            <td width="15%">Tên</td>
+                            <td width="25%"><input type="text" th:field="*{name}"></td>
+                            <td width="60%" style="color: red" th:errors="*{name}"
+                                th:if="${#fields.hasErrors('name')}"></td>
+                        </tr>
+                        <tr>
+                            <td>Ngày sinh</td>
+                            <td><input type="text" th:field="*{dateOfBirth}"></td>
+                            <td style="color: red" th:errors="*{dateOfBirth}"
+                                th:if="${#fields.hasErrors('dateOfBirth')}"></td>
+                        </tr>
+                        <tr>
+                            <td>Giới tính</td>
                             <td>
-                                <input type="text" th:field="*{name}">
+                                <input type="radio" th:field="*{gender}" value="0"/>Nam
+                                <input type="radio" th:field="*{gender}" value="1"/>Nữ
+                                <input type="radio" th:field="*{gender}" value="2"/>Khác
                             </td>
-                            <td  style="color: red;" th:errors="*{name}"
-                                 th:if="${#fields.hasErrors('name')}"></td>
                         </tr>
                         <tr>
-                            <td>Kiểu dịch vụ</td>
-                            <td><select th:field="*{facilityType}" id="facilityTypeSelect">
-                                <option value="" >--Chọn Kiểu--</option>
-                                <option th:each="facilityType: ${facilityTypes}"
-                                        th:value="${facilityType.id}" th:text="${facilityType.name}"></option>
+                            <td>CMND</td>
+                            <td><input type="text" th:field="*{idCard}"></td>
+                            <td style="color: red" th:errors="*{idCard}"
+                                th:if="${#fields.hasErrors('idCard')}"></td>
+                        </tr>
+                        <tr>
+                            <td>SĐT</td>
+                            <td><input type="text" th:field="*{phoneNumber}"></td>
+                            <td style="color: red" th:errors="*{phoneNumber}"
+                                th:if="${#fields.hasErrors('phoneNumber')}"></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><input type="text" th:field="*{email}"></td>
+                            <td style="color: red" th:errors="*{email}"
+                                th:if="${#fields.hasErrors('email')}"></td>
+                        </tr>
+                        <tr>
+                            <td>Địa chỉ</td>
+                            <td><input type="text" th:field="*{address}"></td>
+                            <td style="color: red" th:errors="*{address}"
+                                th:if="${#fields.hasErrors('address')}"></td>
+                        </tr>
+                        <tr>
+                            <td>Loại khách</td>
+                            <td><select th:field="*{customerType}">
+                                <option th:each="customerType: ${customerTypes}"
+                                        th:value="${customerType.id}" th:text="${customerType.name}"></option>
                             </select></td>
-                            <td style="color: red" th:errors="*{facilityType}"
-                                th:if="${#fields.hasErrors('facilityType')}"></td>
+                            <td></td>
                         </tr>
                         <tr>
-                            <td>Diện tích</td>
-                            <td><input  type="text" th:field="*{area}"></td>
-                            <td style="color: red" th:errors="*{area}"
-                                th:if="${#fields.hasErrors('area')}"></td>
-                        </tr>
-                        <tr>
-                            <td>Giá</td>
-                            <td><input type="text" th:field="*{cost}"></td>
-                            <td style="color: red" th:errors="*{cost}"
-                                th:if="${#fields.hasErrors('cost')}"></td>
-                        </tr>
-                        <tr>
-                            <td>Số người tối đa</td>
-                            <td><input type="text" th:field="*{maxPeople}"></td>
-                            <td style="color: red" th:errors="*{maxPeople}"
-                                th:if="${#fields.hasErrors('maxPeople')}"></td>
-                        </tr>
-                        <tr>
-                            <td>Kiểu thuê</td>
-                            <td><select th:field="*{rentType}">
-                                <option th:each="rentType: ${rentTypes}"
-                                        th:value="${rentType.id}" th:text="${rentType.name}"></option>
-                            </select></td>
-                            <td style="color: red" th:errors="*{rentType}"
-                                th:if="${#fields.hasErrors('rentType')}"></td>
-                        </tr>
-                        <tr class="villa house">
-                            <td>Tiêu chuẩn phòng</td>
-                            <td><input type="text" th:field="*{standardRoom}"></td>
-                            <td style="color: red" th:errors="*{standardRoom}"
-                                th:if="${#fields.hasErrors('standardRoom')}"></td>
-                        </tr>
-                        <tr class="villa house">
-                            <td>Mô tả</td>
-                            <td><input type="text" th:field="*{descriptionOtherConvenience}"></td>
-                            <td style="color: red" th:errors="*{descriptionOtherConvenience}"
-                                th:if="${#fields.hasErrors('descriptionOtherConvenience')}"></td>
-                        </tr>
-                        <tr class="villa">
-                            <td>Diện tích hồ bơi</td>
-                            <td><input type="text" th:field="*{poolArea}"></td>
-                            <td style="color: red" th:errors="*{poolArea}"
-                                th:if="${#fields.hasErrors('poolArea')}"></td>
-                        </tr>
-                        <tr class="villa house">
-                            <td>Số tầng</td>
-                            <td><input type="text" th:field="*{numberOfFloors}"></td>
-                            <td style="color: red" th:errors="*{numberOfFloors}"
-                                th:if="${#fields.hasErrors('numberOfFloors')}"></td>
-                        </tr>
-                        <tr class="room">
-                            <td>Dịch vụ miễn phí</td>
-                            <td><input type="text" th:field="*{facilityFree}"></td>
-                            <td style="color: red" th:errors="*{facilityFree}"
-                                th:if="${#fields.hasErrors('facilityFree')}"></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/facilities/create" class="btn btn-primary" role="button">Xóa tất cả
+                            <td><a href="/customer/create" class="btn btn-primary" role="button">Xóa tất cả
                                 dữ
                                 liệu</a></td>
-                            <td>
-                                <button type="submit" class="btn btn-primary">Thêm mới</button>
-                            </td>
+                            <td style="text-align: center"><button type="submit" class="btn btn-primary">Thêm mới</button></td>
                         </tr>
                     </table>
                 </fieldset>
