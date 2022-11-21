@@ -1,0 +1,11 @@
+<h1>Choose Color</h1>
+<div>
+  <p>Red {{red}}</p>
+  <input type="range" min="0" max="255" [(ngModel)]="red" (change)="setColor()">
+  <p>Green {{green}}</p>
+  <input type="range" min="0" max="255" [(ngModel)]="green" (change)="setColor()">
+  <p>Blue {{blue}}</p>
+  <input type="range" min="0" max="255" [(ngModel)]="blue" (change)="setColor()">
+</div>
+<p>Color: {{color}}</p>
+<div style="width: 100px; height: 100px" [style.background-color]="color"></div>
