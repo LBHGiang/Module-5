@@ -1,0 +1,45 @@
+<h2>Today's article</h2>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Title</th>
+    <th scope="col">Like</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of articles; let i = index">
+    <td>{{i + 1}}</td>
+    <td><a href="{{item.url}}" target="_blank">{{item.title}}</a></td>
+    <td>
+      <app-like></app-like>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
+<div>
+  <h2>Article Information</h2>
+  <table>
+    <tr>
+      <td>Title:</td>
+      <td><textarea [(ngModel)]="article.title" cols="70"></textarea></td>
+    </tr>
+    <tr>
+      <td>Url:</td>
+      <td>
+        <textarea [(ngModel)]="article.url" cols="70"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <button style="float: right" (click)="addNewArticle()">Add</button>
+      </td>
+    </tr>
+  </table>
+</div>
+<hr>
+@CodeGym, 2021

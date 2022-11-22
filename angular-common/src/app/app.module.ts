@@ -9,6 +9,10 @@ import {FormsModule} from '@angular/forms';
 import { ProductComponent } from './ss3_angular_overview/practice/product/product.component';
 import { CalculatorComponent } from './ss3_angular_overview/exercise/calculator/calculator.component';
 import { ColorPickerComponent } from './ss3_angular_overview/exercise/color-picker/color-picker.component';
+import { HackerNewComponent } from './ss4_angular_component_directive/practice/hacker-new/hacker-new.component';
+import { LikeComponent } from './ss4_angular_component_directive/practice/like/like.component';
+import { NavbarComponent } from './ss4_angular_component_directive/practice/navbar/navbar.component';
+import { FooterComponent } from './ss4_angular_component_directive/practice/footer/footer.component';
 
 
 
@@ -21,6 +25,10 @@ import { ColorPickerComponent } from './ss3_angular_overview/exercise/color-pick
     ProductComponent,
     CalculatorComponent,
     ColorPickerComponent,
+    HackerNewComponent,
+    LikeComponent,
+    NavbarComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
