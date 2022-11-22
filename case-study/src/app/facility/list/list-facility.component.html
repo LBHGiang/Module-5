@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <div class="row" style="width: 100%; padding: 0; margin: 0;">
+    <div class="notify">
+      <div th:if="${message}">
+        <h2 style="color: #4caf50" th:text="${message}"></h2>
+      </div>
+    </div>
+    <h1 style="text-align: center; color: blue">Danh sách Dịch Vụ</h1>
+
+    <table id="facility_table" class="table table-striped table-bordered" style="width: 100%">
+      <thead>
+      <tr>
+        <th>STT</th>
+        <th>Tên</th>
+        <th>Loại</th>
+        <th>Diện tích</th>
+        <th>Giá</th>
+        <th>Số người</th>
+        <th>Kiểu thuê</th>
+        <th>Chỉnh sửa</th>
+        <th>Xóa</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="facility,status:${facilities}">
+        <td th:text="${facilities.getSize() * facilities.getNumber + status.count}"></td>
+
+        <!--                Send To Detail Modal-->
+        <td><a type="button" class="view" style="border: none; background: transparent; outline: none"
+               data-bs-toggle="modal" th:href="@{/facilities/{id}/view(id=${facility.id})}"
+               data-bs-target="#viewModal">
+          <span class="text-decoration-underline" th:text="${facility.name}"></span>
+        </a></td>
+
+        <td th:text="${facility.facilityType.name}"></td>
+        <td th:text="${facility.area}"></td>
+        <td th:text="${facility.cost}"></td>
+        <td th:text="${facility.maxPeople}"></td>
+        <td th:text="${facility.rentType.name}"></td>
+
+        <td><a th:href="@{/facilities/{id}/edit(id=${facility.id})}" type="button" class="btn btn-warning">CHỈNH
+          SỬA</a></td>
+
+        <!--               Send to delete Modal-->
+        <td>
+          <a type="button" class="deleteConfirm btn btn-danger" data-bs-toggle="modal"
+             th:href="@{/facilities/{id}/delete(id=${facility.id})}" data-bs-target="#deleteModal">
+            Xóa
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!--        Phân trang-->
+    <div class="d-flex justify-content-between">
+      <div>
+        <ul id="border-pagination">
+          <li>
+            <a th:href="@{'/facilities'(page=0, searchName=${searchName}, searchFacilityType=${searchFacilityType})}"
+               title="first page">First</a></li>
+          <li>
+            <a th:href="@{'/facilities'(page=${facilities.number - 1}, searchName=${searchName}, searchFacilityType=${searchFacilityType})}"
+               th:if="${facilities.hasPrevious()}" title="previous page">Previous</a></li>
+          <li><a href="#" class="active"><span
+            th:text="${facilities.number+1}+'/'+${facilities.totalPages}"></span></a></li>
+          <li>
+            <a th:href="@{'/facilities'(page=${facilities.number + 1}, searchName=${searchName}, searchFacilityType=${searchFacilityType})}"
+               th:if="${facilities.hasNext()}" title="next page">Next</a></li>
+          <li>
+            <a th:href="@{'/facilities'(page=${facilities.totalPages}-1, searchName=${searchName}, searchFacilityType=${searchFacilityType})}"
+               title="last page">Last</a></li>
+        </ul>
+      </div>
+      <div>
+        <a href="/facilities/create" class="btn btn-primary" role="button">Thêm mới Dịch Vụ</a>
+      </div>
+    </div>
+  </div>
+</div>

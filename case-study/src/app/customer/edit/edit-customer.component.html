@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <div class="row" style="width: 100%; padding: 0; margin: 0;">
+    <div id="content">
+      <div class="notify" style="text-align: center">
+        <div th:if="${message}">
+          <h2 style="color: #4caf50" th:text="${message}"></h2>
+        </div>
+      </div>
+
+      <h1 style="text-align: center; color: blue">Chỉnh sửa Khách Hàng</h1>
+
+      <form action="/customers/edit" th:object="${customerDto}"
+            method="post" novalidate="novalidate">
+        <fieldset style="width: 65%; margin-left: 25%">
+          <legend>Sửa thông tin</legend>
+          <table class="table table-striped" style="text-align: left">
+            <input type="hidden" th:field="*{id}"/>
+            <tr>
+              <td width="30%">Tên</td>
+              <td width="25%"><input type="text" th:field="*{name}"></td>
+              <td width="45%" style="color: red" th:errors="*{name}"
+                  th:if="${#fields.hasErrors('name')}"></td>
+            </tr>
+            <tr>
+              <td>Ngày sinh</td>
+              <td><input type="date" th:field="*{dateOfBirth}"></td>
+              <td style="color: red" th:errors="*{dateOfBirth}"
+                  th:if="${#fields.hasErrors('dateOfBirth')}"></td>
+            </tr>
+            <tr>
+              <td>Giới tính</td>
+              <td>
+                <input type="radio" th:field="*{gender}" value="0">Nam
+                <input type="radio" th:field="*{gender}" value="1">Nữ
+                <input type="radio" th:field="*{gender}" value="2">Khác
+              </td>
+            </tr>
+            <tr>
+              <td>CMND</td>
+              <td><input type="text" th:field="*{idCard}"></td>
+              <td style="color: red" th:errors="*{idCard}"
+                  th:if="${#fields.hasErrors('idCard')}"></td>
+            </tr>
+            <tr>
+              <td>SĐT</td>
+              <td><input type="text" th:field="*{phoneNumber}"></td>
+              <td style="color: red" th:errors="*{phoneNumber}"
+                  th:if="${#fields.hasErrors('phoneNumber')}"></td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td><input type="text" th:field="*{email}"></td>
+              <td style="color: red" th:errors="*{email}"
+                  th:if="${#fields.hasErrors('email')}"></td>
+            </tr>
+            <tr>
+              <td>Địa chỉ</td>
+              <td><input type="text" th:field="*{address}"></td>
+              <td style="color: red" th:errors="*{address}"
+                  th:if="${#fields.hasErrors('address')}"></td>
+            </tr>
+            <tr>
+              <td>Loại khách</td>
+              <td><select th:field="*{customerType}">
+                <option th:each="customerType: ${customerTypes}"
+                        th:value="${customerType.id}" th:text="${customerType.name}"></option>
+              </select></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><a th:href="@{/customers/{id}/edit(id=${customerDto.id})}" class="btn btn-primary" role="button">Hoàn tác</a></td>
+              <td style="text-align: center">
+                <button type="submit" class="btn btn-primary">Chỉnh sửa</button></td>
+            </tr>
+          </table>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

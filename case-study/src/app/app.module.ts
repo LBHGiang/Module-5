@@ -6,7 +6,18 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home/home.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { NavbarComponent } from './layout/navbar/navbar.component';
+import { ListFacilityComponent } from './facility/list/list-facility.component';
+import { CreateFacilityComponent } from './facility/create/create-facility.component';
+import { EditFacilityComponent } from './facility/edit/edit-facility.component';
+import { NavbarFacilityComponent } from './facility/navbar/navbar-facility.component';
+import {NavbarComponent} from './layout/navbar/navbar.component';
+import {NavbarCustomerComponent} from './customer/navbar/navbar-customer.component';
+import {ListCustomerComponent} from './customer/list/list-customer.component';
+import {CreateCustomerComponent} from './customer/create/create-customer.component';
+import {EditCustomerComponent} from './customer/edit/edit-customer.component';
+import {NavbarContractComponent} from './contract/navbar/navbar-contract.component';
+import {ListContractComponent} from './contract/list/list-contract.component';
+import {CreateContractComponent} from './contract/create/create-contract.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +25,18 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    NavbarComponent
+    ListFacilityComponent,
+    CreateFacilityComponent,
+    EditFacilityComponent,
+    NavbarFacilityComponent,
+    NavbarComponent,
+    NavbarCustomerComponent,
+    ListCustomerComponent,
+    CreateCustomerComponent,
+    EditCustomerComponent,
+    NavbarContractComponent,
+    ListContractComponent,
+    CreateContractComponent
   ],
   imports: [
     BrowserModule,
