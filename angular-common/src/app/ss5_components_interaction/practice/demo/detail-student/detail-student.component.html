@@ -1,0 +1,23 @@
+<div class="card border-primary mt-5">
+  <h3 class="card-header bg-info">Student Detail</h3>
+  <div class="card-body">
+    <table class="table" *ngIf="student; else noData">
+      <tr>
+        <td>Tên</td>
+        <td>{{student.name}}</td>
+      </tr>
+      <tr>
+        <td>Giới Tính</td>
+        <td>{{student.gender}}</td>
+      </tr>
+      <tr>
+        <td>Điểm</td>
+        <td>{{student.point}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<ng-template #noData>
+  <span>Chưa có thông tin!</span>
+</ng-template>

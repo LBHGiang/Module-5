@@ -9,6 +9,7 @@ export class CalculatorComponent implements OnInit {
   num1: number;
   num2: number;
   result: number;
+  message: string;
 
   add() {
     this.result = this.num1 + this.num2;
@@ -23,6 +24,11 @@ export class CalculatorComponent implements OnInit {
   }
 
   div() {
+    if (this.num2 === 0) {
+      this.message = 'Cannot divide by 0';
+    } else {
+      this.message = '';
+    }
     this.result = this.num1 / this.num2;
   }
 

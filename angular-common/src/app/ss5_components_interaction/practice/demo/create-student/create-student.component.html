@@ -1,0 +1,29 @@
+<div class="card border-primary mt-5">
+  <h3 class="card-header bg-success">Create Student</h3>
+  <div class="card-body">
+    <table class="table-striped">
+      <tr>
+        <td>Tên</td>
+        <td><input type="text" #name></td>
+      </tr>
+      <tr>
+        <td>Giới Tính</td>
+        <td>
+          <input type="radio" name="gender" value="0" #gender1>Nữ
+          <input type="radio" name="gender" value="1" #gender2>Nam
+          <input type="radio" name="gender" value="2" #gender3>Khác
+        </td>
+      </tr>
+      <tr>
+        <td>Điểm</td>
+        <td><input type="text" #point></td>
+      </tr>
+    </table>
+    <button type="button" class="btn btn-primary"
+            (click)="createStudent(
+            name.value,
+            gender1.checked ? '0' : gender2.checked ? '1' : '2',
+             point.value)">Thêm mới
+    </button>
+  </div>
+</div>
