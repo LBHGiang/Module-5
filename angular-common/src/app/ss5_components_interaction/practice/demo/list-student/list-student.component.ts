@@ -11,7 +11,7 @@ export class ListStudentComponent implements OnInit {
 
   students: Student[] | undefined;
 
-  // students: Student[] = [
+  // students: User[] = [
   //   {name: 'LBH Giang', gender: 1, point: 100},
   //   {name: 'NV Huy', gender: 1, point: 67},
   //   {name: 'Chou', gender: 0, point: 86},

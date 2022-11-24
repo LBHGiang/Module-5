@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6 mx-auto mt-5">
+      <h2>Create User</h2>
+      <form [formGroup]="rfUser" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="input-email" class="form-label">Tên</label>
+          <input type="text" class="form-control" id="input-email"
+                 formControlName="email" [ngClass]="rfUser.controls['email'].valid ? 'is-valid' : 'is-invalid'">
+          <div class="invalid-feedback">
+            <div *ngIf="rfUser.controls['email'].errors?.required">
+              Vui lòng nhập email.
+            </div>
+            <div *ngIf="rfUser.controls['email'].errors?.pattern">
+              Email chưa đúng định dạng.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="input-password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="input-password"
+                 formControlName="password"
+                 [ngClass]="rfUser.controls['password'].valid ? 'is-valid' : 'is-invalid'">
+          <div class="invalid-feedback">
+            <div *ngIf="rfUser.controls['password'].errors?.required">
+              Vui lòng nhập mật khẩu.
+            </div>
+            <div *ngIf="rfUser.controls['password'].errors?.minlength">
+              Mật khẩu ít nhất 6 kí tự
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+

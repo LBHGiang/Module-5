@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6 mx-auto mt-5">
+      <h2>Create User</h2>
+      <form [formGroup]="rfUser" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="input-name" class="form-label">Tên</label>
+          <input type="text" class="form-control" id="input-name" placeholder="Nguyen Van A"
+                 formControlName="name" [ngClass]="rfUser.controls['name'].valid ? 'is-valid' : 'is-invalid'">
+          <div class="invalid-feedback">
+            <div *ngIf="rfUser.controls['name'].errors?.required">
+              Vui lòng nhập tên.
+            </div>
+            <div *ngIf="rfUser.controls['name'].errors?.minlength">
+              Tên tối thiểu 5 ký tự.
+            </div>
+            <div *ngIf="rfUser.controls['name'].errors?.maxlength">
+              Tên tối đa 25 ký tự.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Giới tính</label>
+          <input type="radio" formControlName="gender" value="1">Male
+          <input type="radio" formControlName="gender" value="0">Famale
+          <input type="radio" formControlName="gender" value="2">Other
+        </div>
+
+        <div class="mb-3">
+          <label for="input-age" class="form-label">Tuổi</label>
+          <input type="text" class="form-control" id="input-age"
+                 formControlName="age" [ngClass]="rfUser.controls['age'].valid ? 'is-valid' : 'is-invalid'">
+          <div class="invalid-feedback">
+            <div *ngIf="rfUser.controls['age'].errors?.required">
+              Vui lòng nhập tuổi.
+            </div>
+            <div *ngIf="rfUser.controls['age'].errors?.min">
+              Người dùng chưa đủ 18 tuổi
+            </div>
+            <div *ngIf="rfUser.controls['age'].errors?.max">
+              Tuổi không được quá 100.
+            </div>
+            <div *ngIf="rfUser.controls['age'].errors?.pattern">
+              Tuổi phải là số.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="input-phone" class="form-label">SĐT</label>
+          <input type="text" class="form-control" id="input-phone"
+                 formControlName="phone" [ngClass]="rfUser.controls['phone'].valid ? 'is-valid' : 'is-invalid'">
+          <div class="invalid-feedback">
+            <div *ngIf="rfUser.controls['phone'].errors?.required">
+              Vui lòng nhập SĐT.
+            </div>
+            <div *ngIf="rfUser.controls['phone'].errors?.pattern">
+              Số điện thoại chưa đúng định dạng, Vd: +841
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="input-country" class="form-label">Quốc gia</label>
+          <select class="form-control" id="input-country" formControlName="country"
+                  [ngClass]="rfUser.controls['country'].valid ? 'is-valid' : 'is-invalid'">
+            <option value="0">--Chọn Quốc gia--</option>
+            <option value="1">Angular</option>
+            <option value="2">Việt Nam</option>
+            <option value="3">Japan</option>
+
+            <div class="invalid-feedback">
+              <div *ngIf="rfUser.controls['country'].errors?.pattern">
+                Vui lòng chọn quốc gia.
+              </div>
+            </div>
+
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="input-password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="input-password"
+                 formControlName="password"
+                 [ngClass]="rfUser.controls['password'].valid && !rfUser.errors?.reConfirmPass ? 'is-valid' : 'is-invalid'">
+          <div class="invalid-feedback">
+            <div *ngIf="rfUser.controls['password'].errors?.required">
+              Vui lòng nhập mật khẩu.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="input-confirmPassword" class="form-label">Password</label>
+          <input type="password" class="form-control" id="input-confirmPassword"
+                 formControlName="confirmPassword"
+                 [ngClass]="rfUser.errors?.reConfirmPass ? 'is-valid' : 'is-invalid'">
+          <div class="invalid-feedback">
+            <div *ngIf="rfUser.controls['confirmPassword'].errors?.required">
+              Vui lòng xác nhận mật khẩu.
+            </div>
+            <div *ngIf="rfUser.errors?.reConfirmPass" class="invalid-feedback">
+              Mật khẩu không khớp.
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+

@@ -13,7 +13,6 @@ export class CreateStudentComponent implements OnInit {
 
   student: Student | undefined;
 
-
   constructor(private studentService: StudentService) {
   }
 
