@@ -1,29 +1,51 @@
-<div class="card border-primary mt-5">
-  <h3 class="card-header bg-success">Create User</h3>
-  <div class="card-body">
-    <table class="table-striped">
-      <tr>
-        <td>Tên</td>
-        <td><input type="text" #name></td>
-      </tr>
-      <tr>
-        <td>Giới Tính</td>
-        <td>
-          <input type="radio" name="gender" value="0" #gender1>Nữ
-          <input type="radio" name="gender" value="1" #gender2>Nam
-          <input type="radio" name="gender" value="2" #gender3>Khác
-        </td>
-      </tr>
-      <tr>
-        <td>Điểm</td>
-        <td><input type="text" #point></td>
-      </tr>
-    </table>
-    <button type="button" class="btn btn-primary"
-            (click)="createStudent(
-            name.value,
-            gender1.checked ? '0' : gender2.checked ? '1' : '2',
-             point.value)">Thêm mới
-    </button>
+<div class="container">
+  <div class="row">
+    <div class="col-6 mx-auto mt-5">
+      <h2>Create Student</h2>
+      <form [formGroup]="rfStudent" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="input-name" class="form-label">Tên</label>
+          <input type="text" class="form-control" id="input-name" placeholder="Nguyen Van A"
+                 formControlName="name" [ngClass]="rfStudent.controls['name'].valid ? 'is-valid' : 'is-invalid'">
+          <div class="invalid-feedback">
+            <div *ngIf="rfStudent.controls['name'].errors?.required">
+              Vui lòng nhập tên.
+            </div>
+            <div *ngIf="rfStudent.controls['name'].errors?.minlength">
+              Tên tối thiểu 5 ký tự.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Giới tính</label>
+          <div class="form-check-inline">
+            <input class="form-check-input" type="radio" formControlName="gender" value="1" id="inlineRadio1">
+            <label class="form-check-label" for="inlineRadio1">Male</label>
+          </div>
+          <div class="form-check-inline">
+            <input class="form-check-input" type="radio" formControlName="gender" value="0" id="inlineRadio0">
+            <label class="form-check-label" for="inlineRadio0">Famale</label>
+          </div>
+          <div class="form-check-inline">
+            <input class="form-check-input" type="radio" formControlName="gender" value="2" id="inlineRadio2">
+            <label class="form-check-label" for="inlineRadio2">Other</label>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="input-point" class="form-label">Điểm</label>
+          <input type="text" class="form-control" id="input-point"
+                 formControlName="point" [ngClass]="rfStudent.controls['point'].valid ? 'is-valid' : 'is-invalid'">
+          <div class="invalid-feedback">
+            <div *ngIf="rfStudent.controls['age'].errors?.required">
+              Vui lòng nhập Điểm.
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="rfStudent.invalid">Submit</button>
+      </form>
+    </div>
   </div>
 </div>
+
+
+

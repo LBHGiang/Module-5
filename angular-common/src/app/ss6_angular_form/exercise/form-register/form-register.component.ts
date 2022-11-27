@@ -5,8 +5,7 @@ import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, 
 export const reConfirmPass: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
-
-  if (password && confirmPassword && password.value !== confirmPassword.value) {
+  if (password.value !== confirmPassword.value && confirmPassword.touched) {
     return {reConfirmPass: true};
   } else {
     return null;
@@ -52,7 +51,7 @@ export class FormRegisterComponent implements OnInit {
       confirmPassword: ['', [
         Validators.required,
       ]]
-    });
+    }, {validators: reConfirmPass});
   }
 
   onSubmit() {
@@ -61,4 +60,3 @@ export class FormRegisterComponent implements OnInit {
     }
   }
 }
-

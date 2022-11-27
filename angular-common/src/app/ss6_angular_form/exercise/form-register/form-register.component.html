@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="mb-3">
-          <label class="form-label">Giới tính</label>
+          <label>Giới tính</label>
           <input type="radio" formControlName="gender" value="1">Male
           <input type="radio" formControlName="gender" value="0">Famale
           <input type="radio" formControlName="gender" value="2">Other
@@ -68,21 +68,19 @@
             <option value="1">Angular</option>
             <option value="2">Việt Nam</option>
             <option value="3">Japan</option>
-
-            <div class="invalid-feedback">
-              <div *ngIf="rfUser.controls['country'].errors?.pattern">
-                Vui lòng chọn quốc gia.
-              </div>
-            </div>
-
           </select>
+          <div class="invalid-feedback">
+            <div *ngIf="rfUser.controls['country'].errors?.pattern">
+              Vui lòng chọn quốc gia.
+            </div>
+          </div>
         </div>
 
         <div class="mb-3">
           <label for="input-password" class="form-label">Password</label>
           <input type="password" class="form-control" id="input-password"
                  formControlName="password"
-                 [ngClass]="rfUser.controls['password'].valid && !rfUser.errors?.reConfirmPass ? 'is-valid' : 'is-invalid'">
+                 [ngClass]="rfUser.controls['password'].valid ? 'is-valid' : 'is-invalid'">
           <div class="invalid-feedback">
             <div *ngIf="rfUser.controls['password'].errors?.required">
               Vui lòng nhập mật khẩu.
@@ -90,23 +88,26 @@
           </div>
         </div>
         <div class="mb-3">
-          <label for="input-confirmPassword" class="form-label">Password</label>
+          <label for="input-confirmPassword" class="form-label">Confirm Password</label>
           <input type="password" class="form-control" id="input-confirmPassword"
                  formControlName="confirmPassword"
-                 [ngClass]="rfUser.errors?.reConfirmPass ? 'is-valid' : 'is-invalid'">
+                 [ngClass]="rfUser.controls['confirmPassword'].valid && !rfUser.errors?.reConfirmPass ? 'is-valid' : 'is-invalid'">
           <div class="invalid-feedback">
-            <div *ngIf="rfUser.controls['confirmPassword'].errors?.required">
+            <div *ngIf="rfUser.controls['confirmPassword'].errors?.required; else elseBlock">
               Vui lòng xác nhận mật khẩu.
             </div>
-            <div *ngIf="rfUser.errors?.reConfirmPass" class="invalid-feedback">
-              Mật khẩu không khớp.
-            </div>
+            <ng-template #elseBlock>
+              <div *ngIf="rfUser.errors?.reConfirmPass">
+                Mật khẩu không khớp!
+              </div>
+            </ng-template>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" [disabled]="rfUser.invalid">Submit</button>
       </form>
     </div>
   </div>
 </div>
+
 
 

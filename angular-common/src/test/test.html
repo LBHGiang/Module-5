@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  class Student {
+    constructor(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+
+    show() {
+      return `Tối tên là: ${this.name}, ${this.age} tuổi`;
+    }
+  }
+
+  let student1 = new Student('Giang', 1);
+  let student2 = new Student('Giang');
+  let student3 = new Student();
+  let student4 = {name: 'G', age: 5}
+  alert(student4.show());
+
+</script>
+</html>

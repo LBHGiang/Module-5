@@ -29,4 +29,11 @@ export class StudentService {
   save(student: Student): void {
     this._students.unshift(student);
   }
+
+
+  findStudentByIndex(index: number): Student {
+    return this._students[index];
+  }
+
+
 }

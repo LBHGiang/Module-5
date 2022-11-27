@@ -1,6 +1,8 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Student} from '../student';
 import {StudentService} from '../service/student-service.service';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-create-student',
@@ -9,21 +11,36 @@ import {StudentService} from '../service/student-service.service';
 })
 export class CreateStudentComponent implements OnInit {
 
-  @Output('newStudent') onCreate = new EventEmitter<Student>();
-
   student: Student | undefined;
 
-  constructor(private studentService: StudentService) {
+  rfStudent: FormGroup;
+
+  constructor(private studentService: StudentService,
+              private router: Router,
+              private formBuilder: FormBuilder
+  ) {
   }
 
   ngOnInit(): void {
+    this.rfStudent = this.formBuilder.group({
+      name: [, [
+        Validators.required,
+        Validators.minLength(5)
+      ]],
+      gender: ['1'],
+      point: [, [
+        Validators.required
+      ]]
+    })
+    ;
   }
 
-  createStudent(name: string, gender1: string, point1: string) {
-    // tslint:disable-next-line:radix
-    this.student = {name, gender: parseInt(gender1), point: parseInt(point1)};
-    // this.onCreate.emit(this.student);
-    this.studentService.save(this.student);
-    console.log(this.student);
+  onSubmit(): void {
+    if (this.rfStudent.valid) {
+      console.log(this.rfStudent.value);
+      this.studentService.save(this.rfStudent.value);
+      this.router.navigateByUrl('/home');
+    }
   }
+
 }

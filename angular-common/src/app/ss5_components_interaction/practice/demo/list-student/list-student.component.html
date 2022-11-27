@@ -16,7 +16,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let item of students; let i = index"
-            (click)="sendStudent(item)">
+                [routerLink]="['/detail', i]">
               <td>{{i + 1}}</td>
               <td>{{item.name}}</td>
               <td [ngSwitch]="item.gender">
@@ -35,10 +35,6 @@
           </table>
         </div>
       </div>
-    </div>
-    <div class="col-4 mx-lg-2">
-    <app-detail-student [studentKey]="student" ></app-detail-student>
-      <app-create-student (newStudent)="getNewStudent($event)"></app-create-student>
     </div>
   </div>
 </div>
