@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from '../product-service.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {CategoryService} from '../category.service';
+import {Category} from '../category';
 import {Product} from '../product';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-product-edit',
@@ -10,36 +12,57 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
+
+  message: string;
+
+  rfProduct: FormGroup | undefined;
+
+  categories: Category[];
+
   product: Product;
 
-  rfProduct: FormGroup;
+  category: Category;
 
   constructor(private productService: ProductService,
               private activatedRoute: ActivatedRoute,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private categoryService: CategoryService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.params.id;
-    this.product = this.productService.getProductById(id);
-    this.rfProduct = this.formBuilder.group({
-      id: [this.product.id],
-      name: [this.product.name],
-      price: [this.product.price],
-      description: [this.product.description]
-    });
-
-    // this.rfProduct = new FormGroup({
-    //   id: new FormControl(this.product.id),
-    //   name: new FormControl(this.product.name),
-    //   price: new FormControl(this.product.price),
-    //   description: new FormControl(this.product.description),
-    // });
+    this.categoryService.findAll().subscribe(
+      data => {
+        this.categories = data;
+      }, error => {
+        this.message = 'Lỗi';
+      }
+    );
+    const id = +this.activatedRoute.snapshot.params.id;
+    this.productService.findById(id).subscribe(
+      product => {
+        this.product = product;
+        this.rfProduct = this.formBuilder.group({
+          id: [product.id],
+          name: [product.name],
+          price: [product.price],
+          category: [product.category],
+          description: [product.description]
+        });
+      }, error => {
+        this.message = 'Không tìm thấy sản phẩm';
+      }
+    );
   }
 
   onUpdate() {
     if (this.rfProduct.valid) {
-      this.productService.updateProduct(this.rfProduct.value);
+      this.productService.update(this.rfProduct.value).subscribe(
+        data => {
+          this.router.navigateByUrl('/product/list');
+        }, error => {
+          this.message = 'Product saved failed';
+        });
     }
   }
 }

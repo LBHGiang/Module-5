@@ -36,6 +36,7 @@ import {ProductRoutingModule} from './ss7_ag_router/practice/san_pham/product-ro
 import { ProductEditComponent } from './ss7_ag_router/practice/san_pham/product-edit/product-edit.component';
 import { ProductDeleteComponent } from './ss7_ag_router/practice/san_pham/product-delete/product-delete.component';
 import { ProductSs7NavbarComponent } from './ss7_ag_router/practice/san_pham/product-ss7-navbar/product-ss7-navbar.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { ProductSs7NavbarComponent } from './ss7_ag_router/practice/san_pham/pro
     StudentRoutingModule,
     PlaylistRoutingModule,
     RouterModule,
-    ProductRoutingModule
+    HttpClientModule,
+    ProductRoutingModule,
   ],
   providers: [],
   exports: [],

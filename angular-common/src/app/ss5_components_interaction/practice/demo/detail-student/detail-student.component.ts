@@ -22,7 +22,6 @@ export class DetailStudentComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       (params: Params) => {
         this.index = params.index;
-        this.student = this.studentService.findStudentByIndex(this.index);
       }
     );
   }

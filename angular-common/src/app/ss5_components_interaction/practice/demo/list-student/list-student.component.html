@@ -15,9 +15,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let item of students; let i = index"
-                [routerLink]="['/detail', i]">
-              <td>{{i + 1}}</td>
+            <tr *ngFor="let item of students;"
+                [routerLink]="['/detail', item.id]">
+              <td>{{item.id}}</td>
               <td>{{item.name}}</td>
               <td [ngSwitch]="item.gender">
                 <span *ngSwitchCase="0">Nữ</span>

@@ -1,10 +1,11 @@
 <h1>Danh sách sản phẩm</h1>
-<table>
+<table *ngIf="products; else errorBlock">
   <tr>
     <td>STT</td>
     <td>Tên</td>
     <td>Giá</td>
     <td>Mô tả</td>
+    <td>Danh Mục</td>
     <td>Edit</td>
     <td>Xoá</td>
   </tr>
@@ -13,7 +14,11 @@
     <td>{{product.name}}</td>
     <td>{{product.price}}</td>
     <td>{{product.description}}</td>
+    <td>{{product.category.name}}</td>
     <td><a [routerLink]="['/product/edit', product.id]">Edit</a></td>
     <td><a [routerLink]="['/product/delete', product.id]">Delete</a></td>
   </tr>
 </table>
+<ng-template #errorBlock>
+  <h2>{{message}}</h2>
+</ng-template>

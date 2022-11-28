@@ -11,19 +11,26 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ProductDeleteComponent implements OnInit {
   product: Product;
 
+  message: string;
+
   constructor(private productService: ProductService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
   }
 
   ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.params.id;
-    this.product = this.productService.getProductById(id);
-    console.log(this.product);
+    const id = +this.activatedRoute.snapshot.params.id;
+    this.productService.findById(id).subscribe(product => {
+      this.product = product;
+    }, error => {
+      this.message = 'Không tìm thấy sản phẩm';
+    });
   }
 
   deleteProduct() {
-    this.productService.removeProduct(this.product.id);
+    this.productService.remove(this.product).subscribe(data => {
+      }
+    );
     this.router.navigateByUrl('/product/list');
   }
 }

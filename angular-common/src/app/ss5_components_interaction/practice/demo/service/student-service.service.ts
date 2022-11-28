@@ -1,39 +1,26 @@
 import {Injectable} from '@angular/core';
 import {Student} from '../student';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
 
-  // tslint:disable-next-line:variable-name
-  private _students: Student[] = [
-    {name: 'LBH Giang', gender: 1, point: 100},
-    {name: 'NV Huy', gender: 1, point: 67},
-    {name: 'Chou', gender: 0, point: 86},
-    {name: 'LH Trường', gender: 1, point: 65},
-    {name: 'NT Hải', gender: 1, point: 90}
-  ];
-
-  constructor() {
+  constructor(private httpClient: HttpClient) {
   }
 
-  get students(): Student[] {
-    return this._students;
+  findAll(): Observable<Student[]> {
+    return this.httpClient.get<Student[]>(environment.api_url_students);
   }
 
-  set students(value: Student[]) {
-    this._students = value;
+  save(student: Student): Observable<Student> {
+    return this.httpClient.post<Student>(environment.api_url_students, student);
   }
 
-  save(student: Student): void {
-    this._students.unshift(student);
+  findById(id: string): Observable<Student> {
+    return this.httpClient.get<Student>(environment.api_url_students + '?' + id);
   }
-
-
-  findStudentByIndex(index: number): Student {
-    return this._students[index];
-  }
-
-
 }

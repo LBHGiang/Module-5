@@ -11,11 +11,14 @@ export class ListStudentComponent implements OnInit {
 
   students: Student[] | undefined;
 
-  // tslint:disable-next-line:variable-name
-  constructor(private _studentService: StudentService) {
+  constructor(private studentService: StudentService) {
   }
 
   ngOnInit(): void {
-    this.students = this._studentService.students;
+    this.studentService.findAll().subscribe(
+      next => {
+        this.students = next;
+      }
+    );
   }
 }

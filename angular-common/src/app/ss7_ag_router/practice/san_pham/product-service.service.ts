@@ -1,67 +1,35 @@
 import {Injectable} from '@angular/core';
 import {Product} from './product';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  products: Product[] = [{
-    id: 1,
-    name: 'IPhone 12',
-    price: 2400000,
-    description: 'New'
-  }, {
-    id: 2,
-    name: 'IPhone 11',
-    price: 1560000,
-    description: 'Like new'
-  }, {
-    id: 3,
-    name: 'IPhone X',
-    price: 968000,
-    description: '97%'
-  }, {
-    id: 4,
-    name: 'IPhone 8',
-    price: 7540000,
-    description: '98%'
-  }, {
-    id: 5,
-    name: 'IPhone 11 Pro',
-    price: 1895000,
-    description: 'Like new'
-  }];
-
-  constructor() {
+  constructor(private httpClient: HttpClient) {
   }
 
-  getAll() {
-    return this.products;
+  findAll(): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(environment.api_url_products);
   }
 
-  save(product: Product) {
-    this.products.unshift(product);
+  save(product: Product): Observable<Product> {
+    return this.httpClient.post<Product>(environment.api_url_products, product);
   }
 
-  getProductById(id: number): Product {
-    for (const item of this.products) {
-      if (item.id === id) {
-        return item;
-      }
-    }
+  update(product: Product): Observable<Product> {
+    return this.httpClient.patch<Product>(environment.api_url_products + '/' + product.id, product);
   }
 
-  updateProduct(product: Product) {
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].id === product.id) {
-        this.products[i] = product;
-      }
-    }
+  findById(id: number): Observable<Product> {
+    return this.httpClient.get<Product>(environment.api_url_products + '/' + id);
   }
 
-  removeProduct(id: number) {
-    this.products = this.products.filter(item => item.id !== id);
+  remove(product: Product): Observable<Product> {
+    return this.httpClient.delete<Product>(environment.api_url_products + '/' + product.id);
   }
 }
 

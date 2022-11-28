@@ -1,0 +1,304 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "Xylia",
+      "gender": 0,
+      "point": 34
+    },
+    {
+      "id": 2,
+      "name": "Sharity",
+      "gender": 0,
+      "point": 49
+    },
+    {
+      "id": 3,
+      "name": "Shay",
+      "gender": 1,
+      "point": 17
+    },
+    {
+      "id": 4,
+      "name": "Bendite",
+      "gender": 0,
+      "point": 78
+    },
+    {
+      "id": 5,
+      "name": "Fraser",
+      "gender": 2,
+      "point": 3
+    },
+    {
+      "id": 6,
+      "name": "Tomasine",
+      "gender": 0,
+      "point": 54
+    },
+    {
+      "id": 7,
+      "name": "Tamara",
+      "gender": 2,
+      "point": 10
+    },
+    {
+      "id": 8,
+      "name": "Karlen",
+      "gender": 1,
+      "point": 1
+    },
+    {
+      "id": 9,
+      "name": "Salem",
+      "gender": 1,
+      "point": 69
+    },
+    {
+      "id": 10,
+      "name": "Chrystal",
+      "gender": 1,
+      "point": 87
+    },
+    {
+      "id": 11,
+      "name": "Shina",
+      "gender": 0,
+      "point": 35
+    },
+    {
+      "id": 12,
+      "name": "Shelagh",
+      "gender": 1,
+      "point": 95
+    },
+    {
+      "id": 13,
+      "name": "Oralia",
+      "gender": 1,
+      "point": 31
+    },
+    {
+      "id": 14,
+      "name": "Romeo",
+      "gender": 0,
+      "point": 55
+    },
+    {
+      "id": 15,
+      "name": "Lilli",
+      "gender": 2,
+      "point": 45
+    },
+    {
+      "id": 16,
+      "name": "Steward",
+      "gender": 0,
+      "point": 94
+    },
+    {
+      "id": 17,
+      "name": "Donaugh",
+      "gender": 1,
+      "point": 93
+    },
+    {
+      "id": 18,
+      "name": "Rafi",
+      "gender": 0,
+      "point": 61
+    },
+    {
+      "id": 19,
+      "name": "Thorsten",
+      "gender": 0,
+      "point": 64
+    },
+    {
+      "id": 20,
+      "name": "Hatti",
+      "gender": 0,
+      "point": 59
+    },
+    {
+      "id": 21,
+      "name": "Cacilie",
+      "gender": 0,
+      "point": 22
+    },
+    {
+      "id": 22,
+      "name": "Edwina",
+      "gender": 2,
+      "point": 3
+    },
+    {
+      "id": 23,
+      "name": "Janine",
+      "gender": 2,
+      "point": 72
+    },
+    {
+      "id": 24,
+      "name": "Mamie",
+      "gender": 2,
+      "point": 46
+    },
+    {
+      "id": 25,
+      "name": "Bordie",
+      "gender": 2,
+      "point": 80
+    },
+    {
+      "id": 26,
+      "name": "Merrill",
+      "gender": 2,
+      "point": 16
+    },
+    {
+      "id": 27,
+      "name": "Scarlett",
+      "gender": 2,
+      "point": 84
+    },
+    {
+      "id": 28,
+      "name": "Evaleen",
+      "gender": 1,
+      "point": 96
+    },
+    {
+      "id": 29,
+      "name": "Breanne",
+      "gender": 0,
+      "point": 18
+    },
+    {
+      "id": 30,
+      "name": "Zane",
+      "gender": 0,
+      "point": 47
+    },
+    {
+      "id": 31,
+      "name": "Linet",
+      "gender": 1,
+      "point": 10
+    },
+    {
+      "id": 32,
+      "name": "Lisette",
+      "gender": 0,
+      "point": 26
+    },
+    {
+      "id": 33,
+      "name": "Abramo",
+      "gender": 2,
+      "point": 45
+    },
+    {
+      "id": 34,
+      "name": "Aeriell",
+      "gender": 2,
+      "point": 97
+    },
+    {
+      "id": 35,
+      "name": "Franciskus",
+      "gender": 0,
+      "point": 29
+    },
+    {
+      "id": 36,
+      "name": "Aileen",
+      "gender": 0,
+      "point": 100
+    },
+    {
+      "id": 37,
+      "name": "Brand",
+      "gender": 0,
+      "point": 60
+    },
+    {
+      "id": 38,
+      "name": "Elmo",
+      "gender": 2,
+      "point": 52
+    },
+    {
+      "id": 39,
+      "name": "Brandi",
+      "gender": 2,
+      "point": 35
+    },
+    {
+      "id": 40,
+      "name": "Ashlee",
+      "gender": 1,
+      "point": 40
+    },
+    {
+      "id": 41,
+      "name": "Janis",
+      "gender": 0,
+      "point": 79
+    },
+    {
+      "id": 42,
+      "name": "Norbert",
+      "gender": 0,
+      "point": 14
+    },
+    {
+      "id": 43,
+      "name": "Sadye",
+      "gender": 2,
+      "point": 29
+    },
+    {
+      "id": 44,
+      "name": "Padget",
+      "gender": 2,
+      "point": 78
+    },
+    {
+      "id": 45,
+      "name": "Tootsie",
+      "gender": 1,
+      "point": 14
+    },
+    {
+      "id": 46,
+      "name": "Robina",
+      "gender": 2,
+      "point": 6
+    },
+    {
+      "id": 47,
+      "name": "Buck",
+      "gender": 1,
+      "point": 64
+    },
+    {
+      "id": 48,
+      "name": "Ferd",
+      "gender": 2,
+      "point": 84
+    },
+    {
+      "id": 49,
+      "name": "Pearl",
+      "gender": 1,
+      "point": 7
+    },
+    {
+      "id": 50,
+      "name": "Felita",
+      "gender": 0,
+      "point": 2
+    }
+  ]
+}
