@@ -129,16 +129,6 @@
         "id": 1,
         "name": "IP"
       }
-    },
-    {
-      "id": 21,
-      "name": "Chau",
-      "price": 1123123,
-      "description": "ừqwef",
-      "category": {
-        "id": 1,
-        "name": "IP"
-      }
     }
   ],
   "categories": [

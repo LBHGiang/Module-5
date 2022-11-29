@@ -21,8 +21,6 @@ export class ProductEditComponent implements OnInit {
 
   product: Product;
 
-  category: Category;
-
   constructor(private productService: ProductService,
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,

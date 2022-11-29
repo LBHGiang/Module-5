@@ -28,9 +28,12 @@ export class ProductDeleteComponent implements OnInit {
   }
 
   deleteProduct() {
-    this.productService.remove(this.product).subscribe(data => {
+    this.productService.remove(this.product).subscribe(
+      data => {
+        this.router.navigateByUrl('/product/list');
+      }, error => {
+        this.message = 'Xoá sản phẩm bị lỗi';
       }
     );
-    this.router.navigateByUrl('/product/list');
   }
 }
