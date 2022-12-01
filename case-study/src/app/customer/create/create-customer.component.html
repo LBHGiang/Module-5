@@ -1,77 +1,144 @@
+<app-navbar></app-navbar>
 <div class="container-fluid">
   <div class="row" style="width: 100%; padding: 0; margin: 0;">
     <div id="content">
-      <div class="notify" style="text-align: center">
-        <div th:if="${message}">
-          <h2 style="color: #4caf50" th:text="${message}"></h2>
-        </div>
-      </div>
 
       <h1 style="text-align: center; color: blue">Thêm mới Khách Hàng</h1>
 
-      <form action="/customers/create" th:object="${customerDto}"
-            method="post">
+      <form *ngIf="rfCustomer" [formGroup]="rfCustomer" (ngSubmit)="submit()" id="form11">
         <fieldset style="width: 65%; margin-left: 25%">
           <legend>Nhập thông tin</legend>
           <table class="table table-striped" style="text-align: left">
-            <input type="hidden" th:field="*{id}"/>
             <tr>
-              <td width="15%">Tên</td>
-              <td width="25%"><input type="text" th:field="*{name}"></td>
-              <td width="60%" style="color: red" th:errors="*{name}"
-                  th:if="${#fields.hasErrors('name')}"></td>
-            </tr>
-            <tr>
-              <td>Ngày sinh</td>
-              <td><input type="text" th:field="*{dateOfBirth}"></td>
-              <td style="color: red" th:errors="*{dateOfBirth}"
-                  th:if="${#fields.hasErrors('dateOfBirth')}"></td>
-            </tr>
-            <tr>
-              <td>Giới tính</td>
-              <td>
-                <input type="radio" th:field="*{gender}" value="0"/>Nam
-                <input type="radio" th:field="*{gender}" value="1"/>Nữ
-                <input type="radio" th:field="*{gender}" value="2"/>Khác
+              <td width="15%"><label for="input-name" class="form-label">Tên*</label></td>
+              <td width="25%">
+                <input type="text" class="form-control" id="input-name" placeholder="Nguyen Van A"
+                       formControlName="name"
+                       [ngClass]="(rfCustomer.controls['name'].touched)?
+                       rfCustomer.controls['name'].invalid?'is-invalid':'is-valid':''">
+              </td>
+              <td width="60%">
+                <div *ngIf="rfCustomer.controls['name'].hasError('required') &&
+                   rfCustomer.controls['name'].touched" style="color: red">
+                  Vui lòng nhập tên.
+                </div>
+                <div *ngIf="rfCustomer.controls['name'].hasError('minlength') &&
+                   rfCustomer.controls['name'].touched" style="color: red">
+                  Tên tối thiểu 5 ký tự.
+                </div>
+                <div *ngIf="rfCustomer.controls['name'].hasError('maxlength') &&
+                   rfCustomer.controls['name'].touched" style="color: red">
+                  Tên tối đa 25 ký tự.
+                </div>
+                <div *ngIf="rfCustomer.controls['name'].hasError('pattern') &&
+                   rfCustomer.controls['name'].touched &&
+                  !rfCustomer.controls['name'].hasError('minlength')&&
+                  !rfCustomer.controls['name'].hasError('maxlength')" style="color: red">
+                  Tên chưa đúng định dạng. Vd: Nguyen Van A
+                </div>
               </td>
             </tr>
             <tr>
-              <td>CMND</td>
-              <td><input type="text" th:field="*{idCard}"></td>
-              <td style="color: red" th:errors="*{idCard}"
-                  th:if="${#fields.hasErrors('idCard')}"></td>
+              <td><label for="input-dayOfBirth" class="form-label">Ngày sinh*</label></td>
+              <td><input type="date" class="form-control" id="input-dayOfBirth" formControlName="dayOfBirth"
+                         [ngClass]="(rfCustomer.controls['dayOfBirth'].touched)?
+                       rfCustomer.controls['dayOfBirth'].invalid?'is-invalid':'is-valid':''">
+              <td>
+                <div *ngIf="rfCustomer.controls['dayOfBirth'].hasError('required') &&
+                   rfCustomer.controls['dayOfBirth'].touched" style="color: red">
+                  Vui lòng nhập ngày sinh.
+                </div>
+                <div *ngIf="rfCustomer.controls['dayOfBirth'].hasError('pattern') &&
+                   rfCustomer.controls['dayOfBirth'].touched" style="color: red">
+                  Ngày sinh chưa đúng.
+                </div>
+              </td>
             </tr>
             <tr>
-              <td>SĐT</td>
-              <td><input type="text" th:field="*{phoneNumber}"></td>
-              <td style="color: red" th:errors="*{phoneNumber}"
-                  th:if="${#fields.hasErrors('phoneNumber')}"></td>
+              <td><label for="input-gender" class="form-label">Giới tính*</label></td>
+              <td>
+                <input type="radio" formControlName="gender" value="0" id="input-gender"/>Nam
+                <input type="radio" formControlName="gender" value="1"/>Nữ
+                <input type="radio" formControlName="gender" value="2"/>Khác
+              </td>
             </tr>
             <tr>
-              <td>Email</td>
-              <td><input type="text" th:field="*{email}"></td>
-              <td style="color: red" th:errors="*{email}"
-                  th:if="${#fields.hasErrors('email')}"></td>
+              <td><label for="input-idCard" class="form-label">CMND*</label></td>
+              <td><input type="text" class="form-control" id="input-idCard" formControlName="idCard"
+                         [ngClass]="(rfCustomer.controls['idCard'].touched)?
+                       rfCustomer.controls['idCard'].invalid?'is-invalid':'is-valid':''">
+              </td>
+              <td>
+                <div *ngIf="rfCustomer.controls['idCard'].hasError('required') &&
+                   rfCustomer.controls['idCard'].touched" style="color: red">
+                  Vui lòng nhập CMND/CCCD.
+                </div>
+                <div *ngIf="rfCustomer.controls['idCard'].hasError('pattern') &&
+                   rfCustomer.controls['idCard'].touched" style="color: red">
+                  CMND/CCCD chưa đúng định dạng. Vd: 123
+                </div>
+              </td>
             </tr>
             <tr>
-              <td>Địa chỉ</td>
-              <td><input type="text" th:field="*{address}"></td>
-              <td style="color: red" th:errors="*{address}"
-                  th:if="${#fields.hasErrors('address')}"></td>
+              <td><label for="input-phone" class="form-label">SĐT*</label></td>
+              <td><input type="text" class="form-control" id="input-phone" formControlName="phone"
+                         [ngClass]="(rfCustomer.controls['phone'].touched)?
+                       rfCustomer.controls['phone'].invalid?'is-invalid':'is-valid':''">
+              </td>
+              <td>
+                <div *ngIf="rfCustomer.controls['phone'].hasError('pattern') &&
+                   rfCustomer.controls['phone'].touched" style="color: red">
+                  SĐT chưa đúng định dạng. Vd: (+84)-1 hoặc (+84)-12
+                </div>
+              </td>
             </tr>
             <tr>
-              <td>Loại khách</td>
-              <td><select th:field="*{customerType}">
-                <option th:each="customerType: ${customerTypes}"
-                        th:value="${customerType.id}" th:text="${customerType.name}"></option>
+              <td><label for="input-email" class="form-label">Email*</label></td>
+              <td><input type="text" class="form-control" id="input-email" formControlName="email"
+                         [ngClass]="(rfCustomer.controls['email'].touched)?
+                       rfCustomer.controls['email'].invalid?'is-invalid':'is-valid':''">
+              </td>
+              <td>
+                <div *ngIf="rfCustomer.controls['email'].hasError('required') &&
+                   rfCustomer.controls['email'].touched" style="color: red">
+                  Vui lòng nhập email.
+                </div>
+                <div *ngIf="rfCustomer.controls['email'].hasError('invalidEmail') &&
+                   rfCustomer.controls['email'].touched" style="color: red">
+                  Email đã tồn tại.
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="input-address" class="form-label">Địa chỉ</label></td>
+              <td><input type="text" class="form-control is-valid" id="input-address" formControlName="address">
+              </td>
+              <td>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="input-customerType" class="form-label">Loại khách*</label></td>
+              <td><select formControlName="customerType" class="form-control" id="input-customerType"
+                          [ngClass]="(rfCustomer.controls['customerType'].touched)?
+                       rfCustomer.controls['customerType'].invalid?'is-invalid':'is-valid':''">
+                <option value="0">--- Chọn Loại khách ---</option>
+                <option *ngFor="let item of customerTypes" [value]="item.id">{{item.name}}</option>
               </select></td>
-              <td></td>
+              <td>
+                <div *ngIf="rfCustomer.controls['customerType'].hasError('pattern') &&
+                   rfCustomer.controls['customerType'].touched" style="color: red">
+                  Vui lòng chọn loại khách.
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="rfCustomer.invalid && rfCustomer.touched ">
+              <td colspan="3"><span style="color: red">Vui lòng nhập đủ các thông tin bắt buộc (có dấu *)</span></td>
             </tr>
             <tr>
-              <td><a href="/customer/create" class="btn btn-primary" role="button">Xóa tất cả
-                dữ
-                liệu</a></td>
-              <td style="text-align: center"><button type="submit" class="btn btn-primary">Thêm mới</button></td>
+              <td><input type="reset" class="btn btn-primary" value="Reset"></td>
+              <td style="text-align: center">
+                <button type="submit" class="btn btn-primary" [disabled]="rfCustomer.invalid">Submit</button>
+              </td>
             </tr>
           </table>
         </fieldset>
@@ -79,3 +146,4 @@
     </div>
   </div>
 </div>
+

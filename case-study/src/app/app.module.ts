@@ -10,15 +10,17 @@ import {CreateFacilityComponent} from './facility/create/create-facility.compone
 import {EditFacilityComponent} from './facility/edit/edit-facility.component';
 import {NavbarFacilityComponent} from './facility/navbar/navbar-facility.component';
 import {NavbarComponent} from './layout/navbar/navbar.component';
-import {NavbarCustomerComponent} from './customer/navbar/navbar-customer.component';
 import {ListCustomerComponent} from './customer/list/list-customer.component';
 import {CreateCustomerComponent} from './customer/create/create-customer.component';
 import {EditCustomerComponent} from './customer/edit/edit-customer.component';
 import {NavbarContractComponent} from './contract/navbar/navbar-contract.component';
 import {ListContractComponent} from './contract/list/list-contract.component';
 import {CreateContractComponent} from './contract/create/create-contract.component';
-import {DeleteCustomerComponent} from './customer/delete-customer/delete-customer.component';
 import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -31,20 +33,23 @@ import {HttpClientModule} from '@angular/common/http';
     EditFacilityComponent,
     NavbarFacilityComponent,
     NavbarComponent,
-    NavbarCustomerComponent,
     ListCustomerComponent,
     CreateCustomerComponent,
     EditCustomerComponent,
     NavbarContractComponent,
     ListContractComponent,
     CreateContractComponent,
-    DeleteCustomerComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
+        ReactiveFormsModule,
+        NgxPaginationModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
