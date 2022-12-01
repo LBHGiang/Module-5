@@ -118,7 +118,7 @@
 
         <td>{{customer.phone}}</td>
         <td>{{customer.email}}</td>
-        <td>{{customer.dayOfBirth}}</td>
+        <td>{{customer.dayOfBirth | date : 'dd/MM/y'}}</td>
         <td>
           <div *ngFor="let item of customerTypes">
             <span *ngIf="item.id == customer.customerType">{{item.name}}</span>

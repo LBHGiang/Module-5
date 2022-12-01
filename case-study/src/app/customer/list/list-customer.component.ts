@@ -19,8 +19,8 @@ export class ListCustomerComponent implements OnInit {
   searchName = '';
   searchEmail = '';
   searchCustomerType = '';
-  searchDayOfBirth = '2022-01-12';
-  searchDayOfBirth2 = '2025-01-12';
+  searchDayOfBirth = '';
+  searchDayOfBirth2 = '';
 
   constructor(private customerService: CustomerService) {
   }
@@ -28,8 +28,7 @@ export class ListCustomerComponent implements OnInit {
   ngOnInit(): void {
     this.getCustomerTypes();
     // this.findNameEmailCustomerType();
-    // this.getAll();
-    this.findNameEmailCustomerTypeDayOfBirth();
+    this.getAll();
   }
 
   findNameEmailCustomerType() {
@@ -94,6 +93,16 @@ export class ListCustomerComponent implements OnInit {
     this.customerService.searchNameEmailCustomerType(
       this.searchName, this.searchEmail, this.searchCustomerType).subscribe(
       data => {
+        // tslint:disable-next-line:triple-equals
+        if (this.searchDayOfBirth == '' && this.searchDayOfBirth2 == '') {
+          this.customerService.showWarningNotification('Không search theo DayOfBirth');
+          return data;
+        }
+        // tslint:disable-next-line:triple-equals
+        if (this.searchDayOfBirth == '' || this.searchDayOfBirth2 == '') {
+          this.customerService.showErrorNotification('Không search theo DayOfBirth');
+          return data;
+        }
         this.customers = data.filter(value => {
             const formatttt = new Date(value.dayOfBirth);
             const startDate = new Date(this.searchDayOfBirth);

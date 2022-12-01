@@ -96,14 +96,14 @@
               <td><label for="input-email" class="form-label">Email*</label></td>
               <td><input type="text" class="form-control" id="input-email" formControlName="email"
                          [ngClass]="(rfCustomer.controls['email'].touched)?
-                       rfCustomer.controls['email'].invalid?'is-invalid':'is-valid':''">
+                       (rfCustomer.controls['email'].invalid || rfCustomer.errors?.inValidEmail) ? 'is-invalid':'is-valid':''">
               </td>
               <td>
                 <div *ngIf="rfCustomer.controls['email'].hasError('required') &&
-                   rfCustomer.controls['email'].touched" style="color: red">
+                     rfCustomer.controls['email'].touched" style="color: red">
                   Vui lòng nhập email.
                 </div>
-                <div *ngIf="rfCustomer.controls['email'].hasError('invalidEmail') &&
+                <div *ngIf="rfCustomer.errors?.inValidEmail &&
                    rfCustomer.controls['email'].touched" style="color: red">
                   Email đã tồn tại.
                 </div>

@@ -98,6 +98,17 @@
       "address": "Hà Nộii",
       "customerType": "5",
       "id": 16
+    },
+    {
+      "name": "Le Giang",
+      "dayOfBirth": "2222-02-22",
+      "gender": "0",
+      "idCard": "111",
+      "phone": "(+84)-33",
+      "email": "www",
+      "address": "DN",
+      "customerType": "1",
+      "id": 18
     }
   ],
   "customerTypes": [

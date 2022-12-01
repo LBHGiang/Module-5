@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {CustomerService} from '../../service/customer.service';
 import {CustomerType} from '../../model/customer-type';
 import {Customer} from '../../model/customer';
@@ -22,13 +22,12 @@ export class CreateCustomerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCustomerTypes();
     this.getAll();
+    this.getCustomerTypes();
   }
 
   getAll(): void {
     this.customerService.findAll().subscribe(data => {
-      console.log(data);
       this.customerList = data;
       this.createForm();
     });
@@ -37,7 +36,6 @@ export class CreateCustomerComponent implements OnInit {
   getCustomerTypes() {
     this.customerService.findAllCustomerTypes().subscribe(
       data => {
-        console.log('lay Type');
         this.customerTypes = data;
       }, error => {
         this.customerService.showErrorNotification('Có lỗi khi tải Loại khách hàng!');
@@ -46,7 +44,6 @@ export class CreateCustomerComponent implements OnInit {
   }
 
   createForm() {
-    console.log('tao form');
     this.rfCustomer = this.formBuilder.group({
       name: ['', [
         Validators.required,
@@ -75,7 +72,7 @@ export class CreateCustomerComponent implements OnInit {
       customerType: [0, [
         Validators.pattern('^[^0]$')
       ]],
-    });
+    }, {validators: this.checkMail});
   }
 
   submit() {
@@ -89,12 +86,14 @@ export class CreateCustomerComponent implements OnInit {
       });
   }
 
-  helloWorld(abstractControl: AbstractControl): any {
-    const check = false;
-    console.log(this.customerList);
-    return check ? null : {invalidEmail: true};
-  }
+  checkMail: ValidatorFn = (abstractControl: AbstractControl): ValidationErrors | null => {
+    const email = abstractControl.get('email').value;
+    let result = null;
+    this.customerList.forEach(item => {
+      if (email === item.email) {
+        result = {inValidEmail: true};
+      }
+    });
+    return result;
+  };
 }
-
-
-
