@@ -80,7 +80,7 @@ export class CreateCustomerComponent implements OnInit {
     this.customerService.save(customer).subscribe(
       data => {
         this.customerService.showSuccessNotification('Thêm mới thành công!');
-        this.rfCustomer.reset();
+        this.createForm();
       }, error => {
         this.customerService.showErrorNotification('Thêm mới thất bại!');
       });

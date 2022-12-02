@@ -69,7 +69,7 @@
             <option *ngFor="let item of customerTypes" [value]="item.id">{{item.name}}</option>
             <option value="">--All--</option>
           </select>
-          <button class="btn btn-outline-success" (click)="resetSearch()">Reset
+          <button class="btn btn-outline-success" (click)="ngOnInit()">Reset
           </button>
         </div>
       </div>
@@ -129,6 +129,8 @@
 
         <!--               Send to delete Modal-->
         <td>
+          <input [checked]="deleteGroupIds.includes(customer.id)" type="checkbox"
+                 (click)="addToDeleteGroup(customer.id)"/>
           <a type="button" class="deleteConfirm btn btn-danger" data-bs-toggle="modal"
              (click)="sendToDeleteModal(customer.id)" data-bs-target="#deleteModal">
             Xóa
@@ -145,6 +147,12 @@
       </div>
       <div>
         <a routerLink="/customers/create" class="btn btn-primary" role="button">Thêm mới Khách hàng</a>
+      </div>
+      <div>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                (click)="sendToDeleteGroupModal()" data-bs-target="#deleteGroupModal">
+          Xóa Nhiều
+        </button>
       </div>
     </div>
   </div>
@@ -230,6 +238,32 @@
         <button id="deleteAccept" class="btn btn-warning" data-bs-dismiss="modal"
                 (click)="deleteCustomer()">Xác nhận
         </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Delete Nhóm-->
+<div class="modal fade" id="deleteGroupModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel2"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2-delete">Xóa Khách Hàng</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let item of deleteGroupCustomer">
+          Xóa Khách Hàng <strong style="color: red">{{item.name}}</strong>?
+        </div>
+        <div class="modal-footer" id="deleteButton2">
+          <button id="deleteCancel2" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ bỏ</button>
+          <button id="deleteAccept2" class="btn btn-warning" data-bs-dismiss="modal"
+                  (click)="deleteGroup()">Xác nhận
+          </button>
+        </div>
       </div>
     </div>
   </div>

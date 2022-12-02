@@ -19,13 +19,16 @@ export class ListCustomerComponent implements OnInit {
   searchName = '';
   searchEmail = '';
   searchCustomerType = '';
-  searchDayOfBirth = '';
-  searchDayOfBirth2 = '';
+  searchDayOfBirth = '1990-01-01';
+  searchDayOfBirth2 = '2030-01-01';
+  deleteGroupIds = [];
+  deleteGroupCustomer = [];
 
   constructor(private customerService: CustomerService) {
   }
 
   ngOnInit(): void {
+    this.resetData();
     this.getCustomerTypes();
     // this.findNameEmailCustomerType();
     this.getAll();
@@ -42,7 +45,6 @@ export class ListCustomerComponent implements OnInit {
 
   getAll() {
     this.customerService.findAll().subscribe(data => {
-      console.log(data);
       this.customers = data;
     }, error => {
       this.customerService.showErrorNotification('Không thể kết nối đến Server');
@@ -81,41 +83,59 @@ export class ListCustomerComponent implements OnInit {
     );
   }
 
-  resetSearch() {
+  resetData() {
     this.searchName = '';
     this.searchEmail = '';
     this.searchCustomerType = '';
-    this.ngOnInit();
+    this.searchDayOfBirth = '1990-01-01';
+    this.searchDayOfBirth2 = '2030-01-01';
+    this.deleteGroupIds = [];
   }
 
   findNameEmailCustomerTypeDayOfBirth() {
     this.p = 1;
+    console.log(this.searchName, this.searchEmail, this.searchCustomerType, this.searchDayOfBirth, this.searchDayOfBirth2);
     this.customerService.searchNameEmailCustomerType(
       this.searchName, this.searchEmail, this.searchCustomerType).subscribe(
       data => {
-        // tslint:disable-next-line:triple-equals
-        if (this.searchDayOfBirth == '' && this.searchDayOfBirth2 == '') {
-          this.customerService.showWarningNotification('Không search theo DayOfBirth');
-          return data;
-        }
-        // tslint:disable-next-line:triple-equals
-        if (this.searchDayOfBirth == '' || this.searchDayOfBirth2 == '') {
-          this.customerService.showErrorNotification('Không search theo DayOfBirth');
-          return data;
-        }
         this.customers = data.filter(value => {
-            const formatttt = new Date(value.dayOfBirth);
-            const startDate = new Date(this.searchDayOfBirth);
-            const endDate = new Date(this.searchDayOfBirth2);
-            if (formatttt > startDate && formatttt < endDate) {
-              // Ngày lớn hơn ngày bắt đầu - startDate
-              return data;
-            }
+          const formatttt = new Date(value.dayOfBirth);
+          const startDate = new Date(this.searchDayOfBirth);
+          const endDate = new Date(this.searchDayOfBirth2);
+          if (formatttt > startDate && formatttt < endDate) {
+            // Ngày lớn hơn ngày bắt đầu - startDate
+            return data;
           }
-        );
+        });
+        console.log(this.customers.length);
+      }
+    );
+  }
 
-      }, error => {
-        this.customerService.showErrorNotification('Không thể kết nối đến Server');
+  sendToDeleteGroupModal() {
+    this.deleteGroupCustomer = [];
+    for (const index of this.deleteGroupIds) {
+      this.customerService.findById(index).subscribe(data => {
+        this.deleteGroupCustomer.push(data);
       });
+    }
+  }
+
+  addToDeleteGroup(id: number) {
+    const index = this.deleteGroupIds.indexOf(id, 0);
+    index > -1 ? this.deleteGroupIds.splice(index, 1) : this.deleteGroupIds.push(id);
+  }
+
+  deleteGroup() {
+    for (const item of this.deleteGroupCustomer) {
+      this.customerService.remove(item).subscribe(data => {
+        this.customerService.showSuccessNotification('Xoá thành công');
+      }, err => {
+        this.customerService.showErrorNotification('Xoá thất bại!' + err.message);
+      }, () => {
+        this.ngOnInit();
+      });
+    }
   }
 }
+

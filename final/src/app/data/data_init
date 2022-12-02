@@ -1,0 +1,96 @@
+{
+  "tickets": [
+    {
+      "id": 1,
+      "price": "200",
+      "fromPlace": "HN",
+      "toPlace": "ĐN",
+      "startDate": "2022-12-13",
+      "startHour": "01:00",
+      "garage": {
+        "id": 1,
+        "name": "Giang"
+      },
+      "quantity": "7"
+    },
+    {
+      "id": 2,
+      "price": "300",
+      "fromPlace": "HN",
+      "toPlace": "SG",
+      "startDate": "2022-12-15",
+      "startHour": "03:00",
+      "garage": {
+        "id": 2,
+        "name": "Hung"
+      },
+      "quantity": "12"
+    },
+    {
+      "id": 3,
+      "price": "100",
+      "fromPlace": "SH",
+      "toPlace": "ĐN",
+      "startDate": "2022-12-14",
+      "startHour": "02:00",
+      "garage": {
+        "id": 3,
+        "name": "Truong"
+      },
+      "quantity": "6"
+    },
+    {
+      "id": 4,
+      "price": "500",
+      "fromPlace": "HN",
+      "toPlace": "ĐH",
+      "startDate": "2022-12-17",
+      "startHour": "12:00",
+      "garage": {
+        "id": 1,
+        "name": "Giang"
+      },
+      "quantity": "7"
+    },
+    {
+      "id": 5,
+      "price": "200",
+      "fromPlace": "HN",
+      "toPlace": "ĐD",
+      "startDate": "2022-12-13",
+      "startHour": "01:00",
+      "garage": {
+        "id": 1,
+        "name": "Giang"
+      },
+      "quantity": "11"
+    },
+    {
+      "id": 6,
+      "price": "400",
+      "fromPlace": "HN",
+      "toPlace": "GN",
+      "startDate": "2022-12-14",
+      "startHour": "01:00",
+      "garage": {
+        "id": 1,
+        "name": "Giang"
+      },
+      "quantity": "4"
+    }
+  ],
+  "garages": [
+    {
+      "id": 1,
+      "name": "Giang"
+    },
+    {
+      "id": 1,
+      "name": "Hung"
+    },
+    {
+      "id": 1,
+      "name": "Truong"
+    }
+  ]
+}
