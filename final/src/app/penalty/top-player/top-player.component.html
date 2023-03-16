@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+  <div class="row" id="content" width="100%">
+    <h2 class="mt-5" style="text-align: center">Danh Sách Top Player</h2>
+
+
+    <div class="row" id="list-row">
+      <table id="customer_table" class="table table-striped table-bordered"
+             style="width: 95%; margin-left: 3%"
+             *ngIf="pagePlayerDto != null">
+        <thead>
+        <tr>
+          <th>Số thứ tự</th>
+          <th>Id</th>
+          <th>Tên cầu thủ</th>
+          <th>Tên Đội tuyển</th>
+          <th>Ngày sinh</th>
+          <th>Số bàn thắng</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of pagePlayerDto.content; index as i">
+          <td style="text-align: center">{{pagePlayerDto.number * pagePlayerDto.size + i + 1}}</td>
+          <td style="text-align: center">{{item.playerId}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.teamName}}</td>
+          <td style="text-align: center">{{item.dayOfBirth}}</td>
+          <td style="text-align: center">{{item.quantity}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <h3 *ngIf="pagePlayerDto == null" id="null-result-noti">Không tìm thấy kết quả phù hợp.</h3>
+      <!--            Phân trang-->
+      <div class="d-flex justify-content-between" id="last-row">
+        <div *ngIf="pagePlayerDto">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination" style="margin-left: 40%">
+              <li class="page-item"><a class="page-link"
+                                       [ngClass]="pagePlayerDto.first ? 'disabled': ''"
+                                       (click)="gotoPage(0)"> << </a></li>
+              <li class="page-item" *ngIf="pagePlayerDto.number - 2 > 0">
+                <a class="page-link" (click)="gotoPage(pagePlayerDto.number - 3)">{{pagePlayerDto.number - 2}}</a>
+              </li>
+              <li class="page-item" *ngIf="pagePlayerDto.number - 1 > 0">
+                <a class="page-link" (click)="gotoPage(pagePlayerDto.number - 2)">{{pagePlayerDto.number - 1}}</a>
+              </li>
+              <li class="page-item" *ngIf="pagePlayerDto.number > 0">
+                <a class="page-link" (click)="gotoPage(pagePlayerDto.number   - 1)">{{pagePlayerDto.number}}</a></li>
+
+              <li class="page-item active"><a class="page-link">{{pagePlayerDto.number + 1}}</a></li>
+
+              <li class="page-item" *ngIf="pagePlayerDto.number + 2 <= pagePlayerDto.totalPages">
+                <a class="page-link" (click)="gotoPage(pagePlayerDto.number + 1)">{{pagePlayerDto.number + 2}}</a>
+              </li>
+              <li class="page-item" *ngIf="pagePlayerDto.number + 3 <= pagePlayerDto.totalPages">
+                <a class="page-link" (click)="gotoPage(pagePlayerDto.number + 2)">{{pagePlayerDto.number + 3}}</a>
+              </li>
+              <li class="page-item" *ngIf="pagePlayerDto.number + 4 <= pagePlayerDto.totalPages">
+                <a class="page-link" (click)="gotoPage(pagePlayerDto.number + 3)">{{pagePlayerDto.number + 4}}</a>
+              </li>
+              <li class="page-item"><a class="page-link"
+                                       [ngClass]="pagePlayerDto.last ? 'disabled': ''"
+                                       (click)="gotoPage(pagePlayerDto.totalPages - 1)"> >> </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

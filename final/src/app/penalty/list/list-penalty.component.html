@@ -1,0 +1,114 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <div class="row" id="content">
+    <div class="row" id="search-row" style="margin-top: 0px">
+      <div class="col-6" style="margin-bottom: 10px">
+        <h2 class="mt-5" style="text-align: center">Danh Sách Penalty</h2>
+      </div>
+      <div class="col-3" style="padding-top:10px">
+        <label for="floatingName">Tên cầu thủ</label>
+        <input type="text" id="floatingName" class="form-control"
+               [(ngModel)]="playerName"/>
+      </div>
+      <div class="col-3" style="padding-top:35px">
+        <button class="btn btn-primary" (click)="search(0)">
+          <i class="fa-solid fa-magnifying-glass"></i> Lọc kết quả
+        </button>
+      </div>
+    </div>
+    <div class="row" id="list-row">
+      <table id="customer_table" class="table table-striped table-bordered" style="width: 95%; margin-left: 3%"
+             *ngIf="pagePenaltyDto != null">
+        <thead>
+        <tr>
+          <th>Số thứ tự</th>
+          <th>Mã Penalty</th>
+          <th>Tên cầu thủ</th>
+          <th>Tên Đội tuyển</th>
+          <th>Góc sút penalty</th>
+          <th>Vào hay không</th>
+          <th>Xoá</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of pagePenaltyDto.content; index as i">
+          <td style="text-align: center">{{pagePenaltyDto.number * pagePenaltyDto.size + i + 1}}</td>
+          <td style="text-align: center">{{item.penaltyId}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.teamName}}</td>
+          <td style="text-align: center">{{item.corner}}</td>
+          <td style="text-align: center">
+            <div *ngIf="item.result == 1">Vào</div>
+            <div *ngIf="item.result == 0">Không</div>
+          </td>
+          <td class="text-center">
+            <button data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="sendToModal(item.penaltyId)">Xoá
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <h3 *ngIf="pagePenaltyDto == null" id="null-result-noti">Không tìm thấy kết quả phù hợp.</h3>
+      <!--            Phân trang-->
+      <div class="d-flex justify-content-between" id="last-row">
+        <div *ngIf="pagePenaltyDto">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination" style="margin-left: 35%">
+              <li class="page-item"><a class="page-link"
+                                       [ngClass]="pagePenaltyDto.first ? 'disabled': ''"
+                                       (click)="gotoPage(0)"> << </a></li>
+              <li class="page-item" *ngIf="pagePenaltyDto.number - 2 > 0">
+                <a class="page-link" (click)="gotoPage(pagePenaltyDto.number - 3)">{{pagePenaltyDto.number - 2}}</a>
+              </li>
+              <li class="page-item" *ngIf="pagePenaltyDto.number - 1 > 0">
+                <a class="page-link" (click)="gotoPage(pagePenaltyDto.number - 2)">{{pagePenaltyDto.number - 1}}</a>
+              </li>
+              <li class="page-item" *ngIf="pagePenaltyDto.number > 0">
+                <a class="page-link" (click)="gotoPage(pagePenaltyDto.number   - 1)">{{pagePenaltyDto.number}}</a></li>
+
+              <li class="page-item active"><a class="page-link">{{pagePenaltyDto.number + 1}}</a></li>
+
+              <li class="page-item" *ngIf="pagePenaltyDto.number + 2 <= pagePenaltyDto.totalPages">
+                <a class="page-link" (click)="gotoPage(pagePenaltyDto.number + 1)">{{pagePenaltyDto.number + 2}}</a>
+              </li>
+              <li class="page-item" *ngIf="pagePenaltyDto.number + 3 <= pagePenaltyDto.totalPages">
+                <a class="page-link" (click)="gotoPage(pagePenaltyDto.number + 2)">{{pagePenaltyDto.number + 3}}</a>
+              </li>
+              <li class="page-item" *ngIf="pagePenaltyDto.number + 4 <= pagePenaltyDto.totalPages">
+                <a class="page-link" (click)="gotoPage(pagePenaltyDto.number + 3)">{{pagePenaltyDto.number + 4}}</a>
+              </li>
+              <li class="page-item"><a class="page-link"
+                                       [ngClass]="pagePenaltyDto.last ? 'disabled': ''"
+                                       (click)="gotoPage(pagePenaltyDto.totalPages - 1)"> >> </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div *ngIf="deletePenalty" class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+     aria-labelledby="deleteModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Xóa Penalty</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Xoá penalty <strong>{{deletePenalty.penaltyId}}</strong> của cầu thủ {{deletePenalty.name}}?
+        <div class="modal-footer">
+          <button id="deleteCancel" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ bỏ</button>
+          <button id="deleteAccept" class="btn btn-warning" data-bs-dismiss="modal"
+                  (click)="delete(deletePenalty.penaltyId)">Xác nhận
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

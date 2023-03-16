@@ -129,7 +129,7 @@ export class ListCustomerComponent implements OnInit {
   deleteGroup() {
     for (const item of this.deleteGroupCustomer) {
       this.customerService.remove(item).subscribe(data => {
-        this.customerService.showSuccessNotification('Xoá thành công');
+
       }, err => {
         this.customerService.showErrorNotification('Xoá thất bại!' + err.message);
       }, () => {

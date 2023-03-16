@@ -38,7 +38,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     EditCustomerComponent,
     NavbarContractComponent,
     ListContractComponent,
-    CreateContractComponent,
+    CreateContractComponent
   ],
   imports: [
     BrowserModule,

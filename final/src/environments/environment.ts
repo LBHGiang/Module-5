@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  api_url_tickets: 'http://localhost:3000/tickets',
-  api_url_garages: 'http://localhost:3000/garages',
+  api_url_penalties_search: 'http://localhost:8080/penalties',
+  api_url_penalties_find: 'http://localhost:8080/penalties/find/',
+  api_url_penalties_remove: 'http://localhost:8080/penalties/remove/',
+  api_url_players: 'http://localhost:8080/penalties/top',
 };
 
 /*

@@ -1,22 +1,19 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ListTicketComponent} from './ticket/list/list-ticket.component';
-import {CreateTicketComponent} from './ticket/create/create-ticket.component';
-import {HomeComponent} from './home/home/home.component';
+import {ListPenaltyComponent} from './penalty/list/list-penalty.component';
+import {TopPlayerComponent} from './penalty/top-player/top-player.component';
 
 
 const routes: Routes = [{
   path: '',
-  component: HomeComponent
+  component: ListPenaltyComponent
 }, {
-  path: 'tickets',
-  component: ListTicketComponent
+  path: 'penalties',
+  component: ListPenaltyComponent
+}, {
+  path: 'players',
+  component: TopPlayerComponent
 }
-  ,
-  {
-    path: 'tickets/create',
-    component: CreateTicketComponent
-  }
 ];
 
 @NgModule({

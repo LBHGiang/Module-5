@@ -6,13 +6,13 @@ import {HomeComponent} from './home/home/home.component';
 import {HeaderComponent} from './layout/header/header.component';
 import {FooterComponent} from './layout/footer/footer.component';
 import {NavbarComponent} from './layout/navbar/navbar.component';
-import {ListTicketComponent} from './ticket/list/list-ticket.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {CreateTicketComponent} from './ticket/create/create-ticket.component';
+import {ListPenaltyComponent} from './penalty/list/list-penalty.component';
+import {TopPlayerComponent} from './penalty/top-player/top-player.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +21,8 @@ import {CreateTicketComponent} from './ticket/create/create-ticket.component';
     HeaderComponent,
     FooterComponent,
     NavbarComponent,
-    ListTicketComponent,
-    CreateTicketComponent
+    ListPenaltyComponent,
+    TopPlayerComponent
   ],
   imports: [
     BrowserModule,
